@@ -9,6 +9,10 @@ flask-migrate = "*"
 python-dotenv = "*"
 sqlalchemy = "*"
 flask-sqlalchemy = "*"
+flask-restful = "*"
+flask-jwt-extended = "*"
+flask-login = "*"
+sqlalchemy-serializer = "*"
 
 [dev-packages]
 

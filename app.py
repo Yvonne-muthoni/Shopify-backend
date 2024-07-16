@@ -1,27 +1,20 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_restful import Api
+from flask_jwt_extended import JWTManager
 from models import db
+from Profile_Resources import ProfileResource  # Ensure this matches the renamed file
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = 'your_secret_key'
 
-app = Flask (__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database_name.db'
-
-#setup migration tool
-migrate = Migrate(app, db)
-
-#link our app with the db 
 db.init_app(app)
+jwt = JWTManager(app)
+api = Api(app)
 
-@app.route('/users')
-def useres():
-    return "input user-name"
+# Register resources
+api.add_resource(ProfileResource, '/profile')
 
-@app.route('/Email')
-def Email():
-    return "input user-email"
-
-@app.route('/Logout')
-def logout():
-    return "Logged out"
+if __name__ == '__main__':
+    app.run(port=5000)
