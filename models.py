@@ -9,7 +9,7 @@ class User(db.Model):
     location = db.Column(db.String(200), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-   
+    is_admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
